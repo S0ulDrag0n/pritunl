@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  pritunl:
+    image: "s0uldrag0n/pritunl:latest"
+    restart: always
+    ports:
+     - "80:80"
+     - "443:443"
+     - "19595:19595" # Server port; add more to bind pritunl servers
+    cap_add:
+     - NET_ADMIN
+    dns:
+     - 8.8.8.8
+     - 1.1.1.1
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data/db:/data/db
+    expose:
+      - "27017"
